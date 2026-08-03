@@ -2,8 +2,6 @@
 
 A reusable, project-agnostic skill pack for building AI-driven applications end to end - concept through delivery - plus dev-role skills for the artifacts that sit alongside that lifecycle.
 
-Split out from [`~/AI-DLC Skills`](../AI-DLC%20Skills/README.md), which now holds only the TPM and QA role skills.
-
 ## Structure
 
 ```
