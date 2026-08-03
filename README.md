@@ -25,19 +25,19 @@ concept → design → plan → ┌───────────────
 
 | Skill | Phase | One-line purpose |
 |---|---|---|
-| [concept](skills/concept/SKILL.md) | Concept | Idea → problem statement, requirements, user stories |
-| [design](skills/design/SKILL.md) | Concept | Requirements → architecture, NFRs, diagrams |
-| [plan](skills/plan/SKILL.md) | Plan | Design → sequenced, sized units of work |
+| [concept](skills/concept/SKILL.md) | Concept | Idea → problem statement, requirements, user stories — via Socratic Discovery, Discovery Lenses, and verifiable requirements |
+| [design](skills/design/SKILL.md) | Concept | Requirements → architecture, NFRs, diagrams, and documented design tradeoffs |
+| [plan](skills/plan/SKILL.md) | Plan | Design → sequenced, sized units of work, with no-orphans requirement traceability |
 | [build](skills/build/SKILL.md) | Construction | Implement a unit of work |
-| [test](skills/test/SKILL.md) | Construction | Verify a unit against its acceptance criteria |
-| [debug](skills/debug/SKILL.md) | Construction | Root-cause and fix a defect |
-| [review](skills/review/SKILL.md) | Construction | Correctness/quality gate before merge |
+| [test](skills/test/SKILL.md) | Construction | Verify a unit against its acceptance criteria, including strict TDD and scenario-sensitivity checks |
+| [debug](skills/debug/SKILL.md) | Construction | Classify, root-cause, and fix a defect with rigorous evidence |
+| [review](skills/review/SKILL.md) | Construction | Correctness/quality gate before merge, plus Critical Review for pre-approval decisions |
 | [security-review](skills/security-review/SKILL.md) | Construction | Dedicated security gate before merge/release |
 | [refactor](skills/refactor/SKILL.md) | Construction | Improve structure without changing behavior |
 | [log](skills/log/SKILL.md) | Delivery | Record progress and decisions as they happen |
 | [release](skills/release/SKILL.md) | Delivery | Deploy, verify, and hand off operationally |
 | [closeout](skills/closeout/SKILL.md) | Delivery | Confirm delivery against original acceptance criteria |
-| [kaizen](skills/kaizen/SKILL.md) | Cross-cutting | Continuous improvement pass every cycle |
+| [kaizen](skills/kaizen/SKILL.md) | Cross-cutting | Continuous improvement pass every cycle, using the 3Ms of waste |
 | [writing-skills](skills/writing-skills/SKILL.md) | Meta | How to add/edit skills in this pack consistently |
 
 ## Role skills (`roles/dev/`)
@@ -57,3 +57,7 @@ These aren't lifecycle stages - they're artifacts the Dev role produces that sup
 Copy the skill(s) you need into a project's `.claude/skills/<name>/SKILL.md` (or symlink the whole `skills/`/`roles/` tree in). See [writing-skills](skills/writing-skills/SKILL.md) before adding or editing a skill so new additions stay consistent with this structure.
 
 Unlike the TPM skills in `AI-DLC Skills`, none of these are symlinked into `.claude/skills/` yet - do that per-project as needed (Claude Code only scans `.claude/skills/`, not `skills/`/`roles/` directly).
+
+## Attribution
+
+Some technique-level content inside `concept`, `plan`, `design`, `review`, `test`, `debug`, and `kaizen` was adapted from other sources rather than written from scratch for this pack - a mix of a personal Playwright QA framework project and a third-party MIT-licensed template. See [ATTRIBUTION.md](ATTRIBUTION.md) for exactly which sections and where they came from.
