@@ -68,6 +68,18 @@ Artifacts and mechanisms a Technical Program Manager uses to run a cross-team pr
 
 ## Using this pack
 
-Copy the skill(s) you need into a project's `.claude/skills/<name>/SKILL.md` (or symlink the whole `ai-dlc/`/`roles/` tree in). See [writing-skills](ai-dlc/writing-skills/SKILL.md) before adding or editing a skill so new additions stay consistent with this structure.
+Claude Code only scans `.claude/skills/<name>/SKILL.md`, one level deep, so symlinking `ai-dlc/` or `roles/` in wholesale won't work: skills would sit one (or for `roles/`, two) levels too deep to be discovered.
 
-None of these are symlinked into `.claude/skills/` yet - do that per-project as needed (Claude Code only scans `.claude/skills/`, not `ai-dlc/`/`roles/` directly).
+Run the installer instead of doing this by hand:
+
+```bash
+/path/to/this/pack/scripts/install-skills.sh /path/to/your/project
+```
+
+Installs every skill as a symlink under `.claude/skills/<name>/`, one per entry, skipping anything already there rather than overwriting it. Useful flags:
+- `--exclude "tpm-*,change-request"` - install everything except these (comma-separated glob patterns)
+- `--only "concept,design,plan"` - install just these
+- `--copy` - copy each skill folder instead of symlinking (use this if the target project will be shared with people who won't have this pack checked out at the same path, a symlink would dangle for them)
+- `--dry-run` - preview what would happen without touching anything
+
+See [writing-skills](ai-dlc/writing-skills/SKILL.md) before adding or editing a skill so new additions stay consistent with this structure.
