@@ -1,6 +1,6 @@
 ---
 name: debug
-description: Use when behavior diverges from what's expected — a bug report, failing test, error, or "this works in one place but not another" — to find the root cause before fixing it.
+description: Use when behavior diverges from what's expected (a bug report, failing test, error, or "this works in one place but not another") to find the root cause before fixing it.
 ---
 
 # Debug
@@ -14,15 +14,15 @@ Find the actual root cause of a defect before changing anything, so the fix reso
 - Something works in one environment/path but not another.
 
 ## Process
-1. **Classify first.** Before investigating, decide which of four categories the failure actually is: a real product defect, a test defect (bad assertion, bad setup, wrong expectation), an environment or dependency problem, or flaky/non-deterministic execution. Each needs a different response — apply the steps below to whichever category it actually is, not to an assumed one.
+1. **Classify first.** Before investigating, decide which of four categories the failure actually is: a real product defect, a test defect (bad assertion, bad setup, wrong expectation), an environment or dependency problem, or flaky/non-deterministic execution. Each needs a different response, apply the steps below to whichever category it actually is, not to an assumed one.
 2. **Reproduce.** Get a reliable, minimal reproduction before doing anything else. If it can't be reproduced, gather more evidence (logs, inputs, environment) instead of guessing.
-3. **Form a hypothesis.** State what you think is causing it and how you'd confirm or rule it out — don't jump straight to a fix.
+3. **Form a hypothesis.** State what you think is causing it and how you'd confirm or rule it out; don't jump straight to a fix.
 4. **Isolate.** Narrow the reproduction down to the smallest case that still shows the bug (bisect: remove/change one variable at a time).
 5. **Confirm root cause**, not just a correlated symptom. Ask "why" until the answer is a specific line/assumption/interaction, not "it's flaky."
-6. **Question the architecture, not just the code, once fixes start failing.** If three or more attempted fixes haven't resolved it, the problem is likely architectural, not a simple bug — stop and discuss rather than trying a fourth patch.
+6. **Question the architecture, not just the code, once fixes start failing.** If three or more attempted fixes haven't resolved it, the problem is likely architectural, not a simple bug; stop and discuss rather than trying a fourth patch.
 7. **Fix at the root**, and write a regression test (see `test`) that fails before the fix and passes after.
 8. **Check for siblings.** If this root cause could exist elsewhere (same pattern copy-pasted, same class of bug), check those spots too.
-9. **Verify rigorously before claiming done.** Identify what command or check actually proves this is fixed, run it in full, and read the real output (exit code, failure count) — don't claim success on "should work," "seems fixed," or "looks good." State the evidence.
+9. **Verify rigorously before claiming done.** Identify what command or check actually proves this is fixed, run it in full, and read the real output (exit code, failure count); don't claim success on "should work," "seems fixed," or "looks good." State the evidence.
 
 ## Output
 A classified, confirmed root cause; a minimal fix addressing it; a regression test that fails without the fix and passes with it; a note on any sibling instances checked; and the evidence (command + output) that proves the fix actually works.
@@ -39,6 +39,3 @@ Feeds back into `build`/`test` for the fix, then `review`. If the root cause is 
 - [ ] A regression test exists that fails without the fix and passes with it
 - [ ] Codebase checked for the same bug pattern elsewhere
 - [ ] Fix claimed done only with explicit evidence (command output), not an assertion that it "should work"
-
-## Attribution
-The classification step, the "question the architecture after 3 failed fixes" rule, and the rigorous-verification framing are adapted from a third-party MIT-licensed skill; see [ATTRIBUTION.md](../../ATTRIBUTION.md) at the repo root.

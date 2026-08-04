@@ -25,7 +25,7 @@ concept → design → plan → ┌───────────────
 
 | Skill | Phase | One-line purpose |
 |---|---|---|
-| [concept](skills/concept/SKILL.md) | Concept | Idea → problem statement, requirements, user stories — via Socratic Discovery, Discovery Lenses, and verifiable requirements |
+| [concept](skills/concept/SKILL.md) | Concept | Idea → problem statement, requirements, user stories, via Socratic Discovery, Discovery Lenses, and verifiable requirements |
 | [design](skills/design/SKILL.md) | Concept | Requirements → architecture, NFRs, diagrams, and documented design tradeoffs |
 | [plan](skills/plan/SKILL.md) | Plan | Design → sequenced, sized units of work, with no-orphans requirement traceability |
 | [build](skills/build/SKILL.md) | Construction | Implement a unit of work |
@@ -44,7 +44,13 @@ concept → design → plan → ┌───────────────
 
 These aren't lifecycle stages - they're artifacts the Dev role produces that support the lifecycle above.
 
-[adr](roles/dev/adr/SKILL.md), [api-contract](roles/dev/api-contract/SKILL.md), [technical-spike](roles/dev/technical-spike/SKILL.md), [dependency-upgrade](roles/dev/dependency-upgrade/SKILL.md), [runbook](roles/dev/runbook/SKILL.md), [release-notes](roles/dev/release-notes/SKILL.md), [change-request](roles/dev/change-request/SKILL.md)
+[adr](roles/dev/adr/SKILL.md), [api-contract](roles/dev/api-contract/SKILL.md), [integration-spec](roles/dev/integration-spec/SKILL.md), [technical-spike](roles/dev/technical-spike/SKILL.md), [dependency-upgrade](roles/dev/dependency-upgrade/SKILL.md), [runbook](roles/dev/runbook/SKILL.md), [release-notes](roles/dev/release-notes/SKILL.md), [change-request](roles/dev/change-request/SKILL.md)
+
+## Role skills (`roles/product-manager/`)
+
+Artifacts the Product Manager role produces: owning and prioritizing a roadmap across the product areas you're responsible for, and defining/reporting the metrics that prove an initiative worked.
+
+[roadmap-prioritization](roles/product-manager/roadmap-prioritization/SKILL.md), [success-metrics](roles/product-manager/success-metrics/SKILL.md)
 
 ## Design principles
 
@@ -57,7 +63,3 @@ These aren't lifecycle stages - they're artifacts the Dev role produces that sup
 Copy the skill(s) you need into a project's `.claude/skills/<name>/SKILL.md` (or symlink the whole `skills/`/`roles/` tree in). See [writing-skills](skills/writing-skills/SKILL.md) before adding or editing a skill so new additions stay consistent with this structure.
 
 Unlike the TPM skills in `AI-DLC Skills`, none of these are symlinked into `.claude/skills/` yet - do that per-project as needed (Claude Code only scans `.claude/skills/`, not `skills/`/`roles/` directly).
-
-## Attribution
-
-Some technique-level content inside `concept`, `plan`, `design`, `review`, `test`, `debug`, and `kaizen` was adapted from other sources rather than written from scratch for this pack - a mix of a personal Playwright QA framework project and a third-party MIT-licensed template. See [ATTRIBUTION.md](ATTRIBUTION.md) for exactly which sections and where they came from.

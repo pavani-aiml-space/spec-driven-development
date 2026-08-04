@@ -6,7 +6,7 @@ description: Use when evaluating or rolling out an upgrade to a library, framewo
 # Dependency Upgrade
 
 ## Purpose
-Upgrade external dependencies (libraries, frameworks, runtimes, base images) deliberately — weighing risk and benefit — instead of reactively (only upgrading when forced by a vulnerability or breakage) or carelessly (upgrading without checking impact).
+Upgrade external dependencies (libraries, frameworks, runtimes, base images) deliberately, weighing risk and benefit, instead of reactively (only upgrading when forced by a vulnerability or breakage) or carelessly (upgrading without checking impact).
 
 ## When to use
 - A dependency has a known vulnerability requiring an upgrade.
@@ -14,10 +14,10 @@ Upgrade external dependencies (libraries, frameworks, runtimes, base images) del
 - Routine maintenance to avoid falling far enough behind that upgrades become high-risk.
 
 ## Process
-1. **Check what changed.** Read the changelog/release notes between current and target version — breaking changes, deprecations, behavior changes, not just the version number.
+1. **Check what changed.** Read the changelog/release notes between current and target version: breaking changes, deprecations, behavior changes, not just the version number.
 2. **Assess blast radius.** How widely is this dependency used in the codebase, and which of those usages touch changed behavior?
-3. **Upgrade incrementally when possible.** Prefer stepping through intermediate major versions over jumping several majors at once — smaller diffs are easier to attribute if something breaks.
-4. **Test thoroughly**, especially around the specific areas the changelog flagged as changed — don't rely solely on the existing suite if it doesn't cover the changed behavior.
+3. **Upgrade incrementally when possible.** Prefer stepping through intermediate major versions over jumping several majors at once. Smaller diffs are easier to attribute if something breaks.
+4. **Test thoroughly**, especially around the specific areas the changelog flagged as changed; don't rely solely on the existing suite if it doesn't cover the changed behavior.
 5. **Check transitive dependencies.** Confirm the upgrade doesn't pull in conflicting or vulnerable transitive versions.
 6. **Have a rollback plan** before rolling out broadly, same as any `release`.
 

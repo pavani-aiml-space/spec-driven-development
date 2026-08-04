@@ -1,12 +1,12 @@
 ---
 name: refactor
-description: Use to improve the structure, clarity, or efficiency of existing code without changing its external behavior — distinct from adding new functionality.
+description: Use to improve the structure, clarity, or efficiency of existing code without changing its external behavior, distinct from adding new functionality.
 ---
 
 # Refactor
 
 ## Purpose
-Improve code that already works — structure, clarity, duplication, efficiency — without changing what it does. Refactoring is a deliberate, scoped action, not a side effect of an unrelated change.
+Improve code that already works (structure, clarity, duplication, efficiency) without changing what it does. Refactoring is a deliberate, scoped action, not a side effect of an unrelated change.
 
 ## When to use
 - `review` or `kaizen` surfaces a specific structural or quality issue worth fixing.

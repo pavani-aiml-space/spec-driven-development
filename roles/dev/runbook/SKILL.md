@@ -1,6 +1,6 @@
 ---
 name: runbook
-description: Use to document how to operate, monitor, and troubleshoot a service — the reference handed off so someone other than the author can diagnose and respond to problems.
+description: Use to document how to operate, monitor, and troubleshoot a service, the reference handed off so someone other than the author can diagnose and respond to problems.
 ---
 
 # Runbook
@@ -14,14 +14,14 @@ Give whoever is on call or supporting a service what they need to diagnose and r
 
 ## Process
 1. **Describe the service at a glance.** What it does, its dependencies, and what "healthy" looks like (key metrics/dashboards).
-2. **List common failure modes.** For each: symptoms (what an on-call person would actually observe), likely cause, and diagnostic steps — written for someone without full context.
-3. **Give concrete diagnostic commands/queries**, not just descriptions — exact commands, log queries, or dashboard links that can be run directly under pressure.
+2. **List common failure modes.** For each: symptoms (what an on-call person would actually observe), likely cause, and diagnostic steps, written for someone without full context.
+3. **Give concrete diagnostic commands/queries**, not just descriptions: exact commands, log queries, or dashboard links that can be run directly under pressure.
 4. **Document recovery actions.** Step-by-step remediation for each known failure mode, including how to roll back or fail over if applicable.
 5. **List escalation paths.** Who/what to contact if the runbook doesn't resolve it, and what information they'll need.
-6. **Keep it current.** Update the runbook whenever a new failure mode is discovered (especially post-incident) — a stale runbook is worse than none, because it misdirects.
+6. **Keep it current.** Update the runbook whenever a new failure mode is discovered (especially post-incident); a stale runbook is worse than none, because it misdirects.
 
 ## Output
-A runbook: service overview, health indicators, failure modes with diagnosis and remediation steps, escalation path.
+A runbook: service overview, health indicators, failure modes with diagnosis and remediation steps, escalation path. See [template.md](template.md) for a fully worked example.
 
 ## Handoff
 Produced alongside `release` for anything with an operational surface; updated as part of incident follow-up.

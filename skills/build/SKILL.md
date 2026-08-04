@@ -23,7 +23,7 @@ Implement a single unit of work from `plan`, matching the design's intent, witho
 Working code for the unit, matching its definition of done, ready for `test`.
 
 ## Handoff
-Feeds `test`. If something in the design turns out to be wrong or infeasible while building, surface it rather than silently deviating — loop back to `design`/`plan`.
+Feeds `test`. If something in the design turns out to be wrong or infeasible while building, surface it rather than silently deviating, loop back to `design`/`plan`.
 
 ## Checklist
 - [ ] Change satisfies the unit's stated definition of done, nothing more
