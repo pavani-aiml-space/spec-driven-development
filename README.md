@@ -1,14 +1,15 @@
 # Spec-Driven Development
 
-A reusable, project-agnostic skill pack for building AI-driven applications from concept through delivery, plus the role specific skills for developer, Product Manager and TPM.
+A reusable, project-agnostic skill pack for building AI-driven applications from concept through delivery, plus developer-role skills that sit alongside the lifecycle.
+
+Product Manager and TPM role skills moved to their own pack: [pm-tpm-skills](https://github.com/pavani-aiml-space/pm-tpm-skills).
+
 ## Structure
 
 ```
 ai-dlc/    Core AI-DLC (AI Development Lifecycle) skills - the concept-to-delivery chain
 roles/
-  dev/               Developer artifacts that sit alongside the lifecycle (ADR, spike, ...)
-  product-manager/   Roadmap prioritization, success-metrics, and build-vs-buy artifacts
-  tpm/               Program-management mechanisms (Confluence Program Hub, RACI, risk, decisions, status)
+  dev/     Developer artifacts that sit alongside the lifecycle (ADR, spike, ...)
 ```
 
 Each skill is a standalone `SKILL.md` (frontmatter `name` + `description`, then Purpose, When to use, Process, Output, Handoff, Checklist) so it can be copied individually into a project's `.claude/skills/` or referenced from this pack directly.
@@ -47,18 +48,9 @@ Dev related skills:
 
 [adr](roles/dev/adr/SKILL.md), [api-contract](roles/dev/api-contract/SKILL.md), [integration-spec](roles/dev/integration-spec/SKILL.md), [technical-spike](roles/dev/technical-spike/SKILL.md), [dependency-upgrade](roles/dev/dependency-upgrade/SKILL.md), [runbook](roles/dev/runbook/SKILL.md), [release-notes](roles/dev/release-notes/SKILL.md), [change-request](roles/dev/change-request/SKILL.md)
 
-## Role skills (`roles/product-manager/`)
+## Product Manager and TPM skills
 
-Product Manager related skills:
-
-[roadmap-prioritization](roles/product-manager/roadmap-prioritization/SKILL.md), [success-metrics](roles/product-manager/success-metrics/SKILL.md), [build-vs-buy](roles/product-manager/build-vs-buy/SKILL.md)
-
-## Role skills (`roles/tpm/`)
-
-Artifacts and mechanisms a Technical Program Manager uses to run a cross-team program end to end: framing the Program Management Lifecycle, standing up the Confluence Program Hub, and keeping ownership, decisions, risk, and status current as the program runs. Several of these publish directly into Confluence/Jira via the Atlassian MCP connector rather than just producing local markdown.
-
-[tpm-pdlc](roles/tpm/tpm-pdlc/SKILL.md), [tpm-concept](roles/tpm/tpm-concept/SKILL.md), [tpm-program-brief](roles/tpm/tpm-program-brief/SKILL.md), [tpm-program-space](roles/tpm/tpm-program-space/SKILL.md), [tpm-tooling-setup](roles/tpm/tpm-tooling-setup/SKILL.md), [tpm-stakeholder-map](roles/tpm/tpm-stakeholder-map/SKILL.md), [tpm-raci](roles/tpm/tpm-raci/SKILL.md), [tpm-contested-decisions](roles/tpm/tpm-contested-decisions/SKILL.md), [tpm-risk-register](roles/tpm/tpm-risk-register/SKILL.md), [decision-log](roles/tpm/decision-log/SKILL.md), [status-report](roles/tpm/status-report/SKILL.md), [tpm-biweekly-stakeholder-update](roles/tpm/tpm-biweekly-stakeholder-update/SKILL.md), [tpm-sdd-bridge](roles/tpm/tpm-sdd-bridge/SKILL.md)
-
+Moved to [pm-tpm-skills](https://github.com/pavani-aiml-space/pm-tpm-skills): PRD generation, roadmap prioritization, success-metrics, build-vs-buy, and the program-management mechanisms (Confluence Program Hub, RACI, risk, decisions, status) a TPM uses to run a cross-team program end to end. `tpm-sdd-bridge` in that pack is what connects a TPM's program artifacts back to the AI-DLC lifecycle here.
 
 ## Using these Skills
 
@@ -71,7 +63,7 @@ Run the installer instead of doing this by hand:
 ```
 
 Installs every skill as a symlink under `.claude/skills/<name>/`, one per entry, skipping anything already there rather than overwriting it. Useful flags:
-- `--exclude "tpm-*,change-request"` - install everything except these (comma-separated glob patterns)
+- `--exclude "change-request,runbook"` - install everything except these (comma-separated glob patterns)
 - `--only "concept,design,plan"` - install just these
 - `--copy` - copy each skill folder instead of symlinking (use this if the target project will be shared with people who won't have this pack checked out at the same path, a symlink would dangle for them)
 - `--dry-run` - preview what would happen without touching anything

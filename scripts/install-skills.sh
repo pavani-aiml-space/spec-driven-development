@@ -9,7 +9,7 @@
 #
 # Options:
 #   --exclude <patterns>   Comma-separated glob patterns to skip (matched
-#                          against skill name), e.g. --exclude "tpm-*,change-request"
+#                          against skill name), e.g. --exclude "change-request,runbook"
 #   --only <patterns>      Comma-separated glob patterns to install; skips
 #                          everything else. Mutually exclusive with --exclude.
 #   --copy                 Copy each skill folder instead of symlinking it.
@@ -66,7 +66,7 @@ installed=0
 skipped_excluded=0
 skipped_existing=0
 
-for src in "$PACK_DIR"/ai-dlc/*/ "$PACK_DIR"/roles/dev/*/ "$PACK_DIR"/roles/product-manager/*/ "$PACK_DIR"/roles/tpm/*/; do
+for src in "$PACK_DIR"/ai-dlc/*/ "$PACK_DIR"/roles/dev/*/; do
   [[ -f "${src}SKILL.md" ]] || continue
   name="$(basename "$src")"
 
