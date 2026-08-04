@@ -1,7 +1,6 @@
 # Spec-Driven Development
 
-A reusable, project-agnostic skill pack for building AI-driven applications end to end - concept through delivery - plus the role skills three different people on that effort actually need: a Developer producing artifacts like ADRs and integration specs, a Product Manager owning the roadmap and build-vs-buy calls, and a Technical Program Manager running the cross-team program those two roles sit inside of.
-
+A reusable, project-agnostic skill pack for building AI-driven applications from concept through delivery, plus the role specific skills for developer, Product Manager and TPM.
 ## Structure
 
 ```
@@ -44,13 +43,13 @@ concept → design → plan → ┌───────────────
 
 ## Role skills (`roles/dev/`)
 
-These aren't lifecycle stages - they're artifacts the Dev role produces that support the lifecycle above.
+Dev related skills:
 
 [adr](roles/dev/adr/SKILL.md), [api-contract](roles/dev/api-contract/SKILL.md), [integration-spec](roles/dev/integration-spec/SKILL.md), [technical-spike](roles/dev/technical-spike/SKILL.md), [dependency-upgrade](roles/dev/dependency-upgrade/SKILL.md), [runbook](roles/dev/runbook/SKILL.md), [release-notes](roles/dev/release-notes/SKILL.md), [change-request](roles/dev/change-request/SKILL.md)
 
 ## Role skills (`roles/product-manager/`)
 
-Artifacts the Product Manager role produces: owning and prioritizing a roadmap across the product areas you're responsible for, defining/reporting the metrics that prove an initiative worked, and deciding whether a capability should be built, bought, or extended.
+Product Manager related skills:
 
 [roadmap-prioritization](roles/product-manager/roadmap-prioritization/SKILL.md), [success-metrics](roles/product-manager/success-metrics/SKILL.md), [build-vs-buy](roles/product-manager/build-vs-buy/SKILL.md)
 
@@ -60,13 +59,8 @@ Artifacts and mechanisms a Technical Program Manager uses to run a cross-team pr
 
 [tpm-pdlc](roles/tpm/tpm-pdlc/SKILL.md), [tpm-concept](roles/tpm/tpm-concept/SKILL.md), [tpm-program-brief](roles/tpm/tpm-program-brief/SKILL.md), [tpm-program-space](roles/tpm/tpm-program-space/SKILL.md), [tpm-tooling-setup](roles/tpm/tpm-tooling-setup/SKILL.md), [tpm-stakeholder-map](roles/tpm/tpm-stakeholder-map/SKILL.md), [tpm-raci](roles/tpm/tpm-raci/SKILL.md), [tpm-contested-decisions](roles/tpm/tpm-contested-decisions/SKILL.md), [tpm-risk-register](roles/tpm/tpm-risk-register/SKILL.md), [decision-log](roles/tpm/decision-log/SKILL.md), [status-report](roles/tpm/status-report/SKILL.md), [tpm-biweekly-stakeholder-update](roles/tpm/tpm-biweekly-stakeholder-update/SKILL.md), [tpm-sdd-bridge](roles/tpm/tpm-sdd-bridge/SKILL.md)
 
-## Design principles
 
-- **No project-specific content.** Every skill here should apply to any AI-driven application, not just the one that inspired it.
-- **Consolidated, not duplicated.** Where multiple projects had overlapping skills under different names (e.g. `audit` / `code-review` / `pr-review`), they were merged into one canonical skill rather than kept as near-duplicates.
-- **Each skill states its handoff.** Skills are meant to chain - the Handoff section says what feeds in and what it feeds out to, so the pack composes into a full lifecycle rather than being a set of disconnected checklists.
-
-## Using this pack
+## Using these Skills
 
 Claude Code only scans `.claude/skills/<name>/SKILL.md`, one level deep, so symlinking `ai-dlc/` or `roles/` in wholesale won't work: skills would sit one (or for `roles/`, two) levels too deep to be discovered.
 
