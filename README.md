@@ -1,18 +1,20 @@
 # Spec-Driven Development
 
-A reusable, project-agnostic skill pack for building AI-driven applications end to end - concept through delivery - plus dev-role skills for the artifacts that sit alongside that lifecycle.
+A reusable, project-agnostic skill pack for building AI-driven applications end to end - concept through delivery - plus the role skills three different people on that effort actually need: a Developer producing artifacts like ADRs and integration specs, a Product Manager owning the roadmap and build-vs-buy calls, and a Technical Program Manager running the cross-team program those two roles sit inside of.
 
 ## Structure
 
 ```
-skills/    Core SDLC lifecycle skills - the concept-to-delivery chain
+ai-dlc/    Core AI-DLC (AI Development Lifecycle) skills - the concept-to-delivery chain
 roles/
-  dev/     Developer artifacts that sit alongside the lifecycle (ADR, spike, ...)
+  dev/               Developer artifacts that sit alongside the lifecycle (ADR, spike, ...)
+  product-manager/   Roadmap prioritization, success-metrics, and build-vs-buy artifacts
+  tpm/               Program-management mechanisms (Confluence Program Hub, RACI, risk, decisions, status)
 ```
 
 Each skill is a standalone `SKILL.md` (frontmatter `name` + `description`, then Purpose, When to use, Process, Output, Handoff, Checklist) so it can be copied individually into a project's `.claude/skills/` or referenced from this pack directly.
 
-## Lifecycle flow (`skills/`)
+## AI-DLC flow (`ai-dlc/`)
 
 ```
 concept → design → plan → ┌────────────────────────────────┐ → log → release → closeout → kaizen
@@ -25,20 +27,20 @@ concept → design → plan → ┌───────────────
 
 | Skill | Phase | One-line purpose |
 |---|---|---|
-| [concept](skills/concept/SKILL.md) | Concept | Idea → problem statement, requirements, user stories, via Socratic Discovery, Discovery Lenses, and verifiable requirements |
-| [design](skills/design/SKILL.md) | Concept | Requirements → architecture, NFRs, diagrams, and documented design tradeoffs |
-| [plan](skills/plan/SKILL.md) | Plan | Design → sequenced, sized units of work, with no-orphans requirement traceability |
-| [build](skills/build/SKILL.md) | Construction | Implement a unit of work |
-| [test](skills/test/SKILL.md) | Construction | Verify a unit against its acceptance criteria, including strict TDD and scenario-sensitivity checks |
-| [debug](skills/debug/SKILL.md) | Construction | Classify, root-cause, and fix a defect with rigorous evidence |
-| [review](skills/review/SKILL.md) | Construction | Correctness/quality gate before merge, plus Critical Review for pre-approval decisions |
-| [security-review](skills/security-review/SKILL.md) | Construction | Dedicated security gate before merge/release |
-| [refactor](skills/refactor/SKILL.md) | Construction | Improve structure without changing behavior |
-| [log](skills/log/SKILL.md) | Delivery | Record progress and decisions as they happen |
-| [release](skills/release/SKILL.md) | Delivery | Deploy, verify, and hand off operationally |
-| [closeout](skills/closeout/SKILL.md) | Delivery | Confirm delivery against original acceptance criteria |
-| [kaizen](skills/kaizen/SKILL.md) | Cross-cutting | Continuous improvement pass every cycle, using the 3Ms of waste |
-| [writing-skills](skills/writing-skills/SKILL.md) | Meta | How to add/edit skills in this pack consistently |
+| [concept](ai-dlc/concept/SKILL.md) | Concept | Idea → problem statement, requirements, user stories, via Socratic Discovery, Discovery Lenses, and verifiable requirements |
+| [design](ai-dlc/design/SKILL.md) | Concept | Requirements → architecture, NFRs, diagrams, and documented design tradeoffs |
+| [plan](ai-dlc/plan/SKILL.md) | Plan | Design → sequenced, sized units of work, with no-orphans requirement traceability |
+| [build](ai-dlc/build/SKILL.md) | Construction | Implement a unit of work |
+| [test](ai-dlc/test/SKILL.md) | Construction | Verify a unit against its acceptance criteria, including strict TDD and scenario-sensitivity checks |
+| [debug](ai-dlc/debug/SKILL.md) | Construction | Classify, root-cause, and fix a defect with rigorous evidence |
+| [review](ai-dlc/review/SKILL.md) | Construction | Correctness/quality gate before merge, plus Critical Review for pre-approval decisions |
+| [security-review](ai-dlc/security-review/SKILL.md) | Construction | Dedicated security gate before merge/release |
+| [refactor](ai-dlc/refactor/SKILL.md) | Construction | Improve structure without changing behavior |
+| [log](ai-dlc/log/SKILL.md) | Delivery | Record progress and decisions as they happen |
+| [release](ai-dlc/release/SKILL.md) | Delivery | Deploy, verify, and hand off operationally |
+| [closeout](ai-dlc/closeout/SKILL.md) | Delivery | Confirm delivery against original acceptance criteria |
+| [kaizen](ai-dlc/kaizen/SKILL.md) | Cross-cutting | Continuous improvement pass every cycle, using the 3Ms of waste |
+| [writing-skills](ai-dlc/writing-skills/SKILL.md) | Meta | How to add/edit skills in this pack consistently |
 
 ## Role skills (`roles/dev/`)
 
@@ -48,9 +50,15 @@ These aren't lifecycle stages - they're artifacts the Dev role produces that sup
 
 ## Role skills (`roles/product-manager/`)
 
-Artifacts the Product Manager role produces: owning and prioritizing a roadmap across the product areas you're responsible for, and defining/reporting the metrics that prove an initiative worked.
+Artifacts the Product Manager role produces: owning and prioritizing a roadmap across the product areas you're responsible for, defining/reporting the metrics that prove an initiative worked, and deciding whether a capability should be built, bought, or extended.
 
-[roadmap-prioritization](roles/product-manager/roadmap-prioritization/SKILL.md), [success-metrics](roles/product-manager/success-metrics/SKILL.md)
+[roadmap-prioritization](roles/product-manager/roadmap-prioritization/SKILL.md), [success-metrics](roles/product-manager/success-metrics/SKILL.md), [build-vs-buy](roles/product-manager/build-vs-buy/SKILL.md)
+
+## Role skills (`roles/tpm/`)
+
+Artifacts and mechanisms a Technical Program Manager uses to run a cross-team program end to end: framing the Program Management Lifecycle, standing up the Confluence Program Hub, and keeping ownership, decisions, risk, and status current as the program runs. Several of these publish directly into Confluence/Jira via the Atlassian MCP connector rather than just producing local markdown.
+
+[tpm-pdlc](roles/tpm/tpm-pdlc/SKILL.md), [tpm-concept](roles/tpm/tpm-concept/SKILL.md), [tpm-program-brief](roles/tpm/tpm-program-brief/SKILL.md), [tpm-program-space](roles/tpm/tpm-program-space/SKILL.md), [tpm-tooling-setup](roles/tpm/tpm-tooling-setup/SKILL.md), [tpm-stakeholder-map](roles/tpm/tpm-stakeholder-map/SKILL.md), [tpm-raci](roles/tpm/tpm-raci/SKILL.md), [tpm-contested-decisions](roles/tpm/tpm-contested-decisions/SKILL.md), [tpm-risk-register](roles/tpm/tpm-risk-register/SKILL.md), [decision-log](roles/tpm/decision-log/SKILL.md), [status-report](roles/tpm/status-report/SKILL.md), [tpm-biweekly-stakeholder-update](roles/tpm/tpm-biweekly-stakeholder-update/SKILL.md), [tpm-sdd-bridge](roles/tpm/tpm-sdd-bridge/SKILL.md)
 
 ## Design principles
 
@@ -60,6 +68,6 @@ Artifacts the Product Manager role produces: owning and prioritizing a roadmap a
 
 ## Using this pack
 
-Copy the skill(s) you need into a project's `.claude/skills/<name>/SKILL.md` (or symlink the whole `skills/`/`roles/` tree in). See [writing-skills](skills/writing-skills/SKILL.md) before adding or editing a skill so new additions stay consistent with this structure.
+Copy the skill(s) you need into a project's `.claude/skills/<name>/SKILL.md` (or symlink the whole `ai-dlc/`/`roles/` tree in). See [writing-skills](ai-dlc/writing-skills/SKILL.md) before adding or editing a skill so new additions stay consistent with this structure.
 
-Unlike the TPM skills in `AI-DLC Skills`, none of these are symlinked into `.claude/skills/` yet - do that per-project as needed (Claude Code only scans `.claude/skills/`, not `skills/`/`roles/` directly).
+None of these are symlinked into `.claude/skills/` yet - do that per-project as needed (Claude Code only scans `.claude/skills/`, not `ai-dlc/`/`roles/` directly).

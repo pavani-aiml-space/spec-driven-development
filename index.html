@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Spec-Driven Development — a skill pack for AI-driven engineering</title>
+<meta name="description" content="A project-agnostic Claude Code skill pack covering the full AI-DLC (AI Development Lifecycle) plus Dev, Product Manager, and Technical Program Manager role skills, including Confluence/Jira mechanisms." />
+<style>
+  :root {
+    --bg: #EBF0F1;
+    --surface: #F8FBFB;
+    --surface-2: #FFFFFF;
+    --ink: #17232E;
+    --ink-soft: #4B5D6B;
+    --ink-faint: #7C8D99;
+    --accent: #1F5FA8;
+    --accent-strong: #0E3A66;
+    --brass: #8A5D1E;
+    --brass-soft: #C99A4D;
+    --line: #C7D3D9;
+    --line-soft: #DAE3E7;
+    --good: #2E7D5B;
+    --shadow: 0 1px 0 rgba(14,58,102,0.06);
+    --font-display: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Menlo, Consolas, monospace;
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0E161E;
+      --surface: #131E28;
+      --surface-2: #16212C;
+      --ink: #E7EEF2;
+      --ink-soft: #A2B4C0;
+      --ink-faint: #6F8492;
+      --accent: #6FA8E0;
+      --accent-strong: #9CC6F0;
+      --brass: #D9A54B;
+      --brass-soft: #B98735;
+      --line: #253645;
+      --line-soft: #1D2C39;
+      --good: #5FBE93;
+      --shadow: 0 1px 0 rgba(0,0,0,0.3);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0E161E;
+    --surface: #131E28;
+    --surface-2: #16212C;
+    --ink: #E7EEF2;
+    --ink-soft: #A2B4C0;
+    --ink-faint: #6F8492;
+    --accent: #6FA8E0;
+    --accent-strong: #9CC6F0;
+    --brass: #D9A54B;
+    --brass-soft: #B98735;
+    --line: #253645;
+    --line-soft: #1D2C39;
+    --good: #5FBE93;
+    --shadow: 0 1px 0 rgba(0,0,0,0.3);
+  }
+  :root[data-theme="light"] {
+    --bg: #EBF0F1;
+    --surface: #F8FBFB;
+    --surface-2: #FFFFFF;
+    --ink: #17232E;
+    --ink-soft: #4B5D6B;
+    --ink-faint: #7C8D99;
+    --accent: #1F5FA8;
+    --accent-strong: #0E3A66;
+    --brass: #8A5D1E;
+    --brass-soft: #C99A4D;
+    --line: #C7D3D9;
+    --line-soft: #DAE3E7;
+    --good: #2E7D5B;
+    --shadow: 0 1px 0 rgba(14,58,102,0.06);
+  }
+
+  * { box-sizing: border-box; }
+  html { color-scheme: light dark; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+
+  a { color: var(--accent-strong); }
+  a:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 28px 28px;
+    background-position: center top;
+    border-bottom: 1px solid var(--line);
+  }
+  .hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, var(--bg) 0%, transparent 55%, var(--bg) 100%);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; padding: 72px 24px 48px; }
+  .eyebrow {
+    font-family: var(--font-display);
+    font-size: 12.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 22px; height: 1px;
+    background: var(--accent);
+    display: inline-block;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(30px, 5vw, 46px);
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+    margin: 18px 0 14px;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+  .thesis {
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 62ch;
+    text-wrap: pretty;
+    margin: 0 0 28px;
+  }
+  .thesis strong { color: var(--ink); font-weight: 600; }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; }
+  .tag {
+    font-family: var(--font-display);
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    padding: 5px 10px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    color: var(--ink-soft);
+    background: var(--surface);
+  }
+  .tag.role-tpm { border-color: var(--brass); color: var(--brass); }
+
+  /* ---------- Section scaffolding ---------- */
+  main { padding: 8px 0 40px; }
+  section { padding: 52px 0; border-bottom: 1px solid var(--line-soft); }
+  section:last-of-type { border-bottom: none; }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 16px;
+    align-items: baseline;
+    margin-bottom: 22px;
+  }
+  .section-num {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--ink-faint);
+    padding-top: 4px;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 22px;
+    margin: 0;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  .section-body { grid-column: 2; }
+  .lede {
+    color: var(--ink-soft);
+    max-width: 68ch;
+    margin: 0 0 26px;
+  }
+  code { font-family: var(--font-display); font-size: 0.92em; }
+  .path {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: var(--ink-faint);
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+
+  /* ---------- What this is ---------- */
+  .format-box {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 18px 20px;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+  .format-box code { color: var(--ink); }
+
+  /* ---------- Lifecycle diagram ---------- */
+  .diagram-scroll { overflow-x: auto; padding-bottom: 6px; margin: 4px 0 30px; }
+  .diagram {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    min-width: 780px;
+    font-family: var(--font-display);
+    font-size: 12.5px;
+  }
+  .dnode {
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 10px 12px;
+    color: var(--ink);
+    white-space: nowrap;
+    box-shadow: var(--shadow);
+  }
+  .darrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    color: var(--ink-faint);
+  }
+  .dloop {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+    padding: 12px 16px;
+    border: 1px dashed var(--accent);
+    border-radius: 6px;
+    color: var(--accent);
+  }
+  .dloop .loop-items { display: flex; align-items: center; gap: 8px; flex-wrap: nowrap; color: var(--ink); }
+  .dloop .loop-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  table.lifecycle {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  table.lifecycle th, table.lifecycle td {
+    text-align: left;
+    padding: 9px 12px 9px 0;
+    border-bottom: 1px solid var(--line-soft);
+    vertical-align: top;
+  }
+  table.lifecycle th {
+    font-family: var(--font-display);
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 500;
+  }
+  table.lifecycle td.skill { font-family: var(--font-display); color: var(--ink); white-space: nowrap; }
+  table.lifecycle td.phase { color: var(--ink-soft); white-space: nowrap; }
+  table.lifecycle td.purpose { color: var(--ink-soft); }
+  .table-scroll { overflow-x: auto; }
+
+  /* ---------- Role cards ---------- */
+  .role-intro {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .role-path { margin-left: auto; }
+
+  .skill-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: var(--line-soft);
+    border: 1px solid var(--line-soft);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 18px;
+  }
+  .skill-card {
+    background: var(--surface-2);
+    padding: 16px 18px;
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 14px;
+  }
+  .skill-name {
+    font-family: var(--font-display);
+    font-size: 13.5px;
+    color: var(--accent-strong);
+    align-self: start;
+    word-break: break-word;
+  }
+  .skill-desc { color: var(--ink-soft); font-size: 14.5px; }
+  @media (max-width: 620px) {
+    .skill-card { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  /* ---------- TPM group headers ---------- */
+  .group-label {
+    font-family: var(--font-display);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--brass);
+    margin: 30px 0 4px;
+  }
+  .group-label:first-of-type { margin-top: 4px; }
+  .group-note { color: var(--ink-faint); font-size: 13.5px; margin: 0 0 10px; max-width: 66ch; }
+
+  .callout {
+    display: flex;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--brass-soft);
+    border-left: 3px solid var(--brass);
+    border-radius: 4px;
+    padding: 14px 16px;
+    margin: 22px 0 26px;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+  }
+  .callout strong { color: var(--ink); }
+  .callout .mark { font-family: var(--font-display); color: var(--brass); flex: none; }
+
+  /* ---------- Footer ---------- */
+  footer {
+    padding: 36px 0 60px;
+    color: var(--ink-faint);
+    font-size: 13px;
+  }
+  footer .rule { border: none; border-top: 1px solid var(--line-soft); margin: 0 0 24px; }
+  footer a { color: var(--ink-soft); }
+  .foot-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap hero-inner">
+    <p class="eyebrow">Claude Code skill pack &middot; spec-driven-development</p>
+    <h1>Spec-Driven Development</h1>
+    <p class="thesis">
+      A <strong>project-agnostic skill library</strong> that encodes an entire AI-DLC (AI Development
+      Lifecycle), concept through closeout, plus the role-specific playbooks that run alongside it: what a
+      <strong>Developer</strong>, a <strong>Product Manager</strong>, and a
+      <strong>Technical Program Manager</strong> each produce to keep a cross-team program moving.
+      Every skill is a standalone <code>SKILL.md</code> a Claude Code agent can load on its own.
+    </p>
+    <div class="tag-row">
+      <span class="tag">14 AI-DLC skills</span>
+      <span class="tag">8 dev-role skills</span>
+      <span class="tag">3 product-manager skills</span>
+      <span class="tag role-tpm">13 tpm-role skills &middot; live Confluence/Jira</span>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <section id="what-this-is">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2>What this is</h2>
+    </div>
+    <div class="section-body">
+      <p class="lede">
+        This repo is not a single project &mdash; it is a reusable pack of Claude Code
+        <span class="path">SKILL.md</span> files, each one a self-contained playbook for one
+        recurring piece of work. Copy the ones you need into a project's
+        <span class="path">.claude/skills/</span>, and the agent picks up the right one by name
+        and description, no project-specific content baked in.
+      </p>
+      <div class="format-box">
+        Every skill follows the same shape: frontmatter (<code>name</code> +
+        <code>description</code>, the two fields Claude Code uses to decide when to trigger it),
+        then <strong>Purpose &middot; When to use &middot; Process &middot; Output &middot;
+        Handoff &middot; Checklist</strong>. The Handoff section is what lets skills chain into a
+        pipeline instead of staying a pile of disconnected checklists &mdash; see
+        <span class="path">ai-dlc/writing-skills/SKILL.md</span> for the full convention.
+      </div>
+    </div>
+  </section>
+
+  <section id="lifecycle">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2>AI-DLC &mdash; <span class="path">ai-dlc/</span></h2>
+    </div>
+    <div class="section-body">
+      <p class="lede">
+        The concept-to-delivery chain every unit of work moves through, with one loop
+        (build &harr; test &harr; debug &harr; review &harr; security-review &harr; refactor)
+        repeated per unit of work coming out of <code>plan</code>.
+      </p>
+
+      <div class="diagram-scroll">
+        <div class="diagram">
+          <div class="dnode">concept</div>
+          <div class="darrow">&rarr;</div>
+          <div class="dnode">design</div>
+          <div class="darrow">&rarr;</div>
+          <div class="dnode">plan</div>
+          <div class="darrow">&rarr;</div>
+          <div class="dloop">
+            <span class="loop-label">looped per unit of work</span>
+            <div class="loop-items">build &harr; test &harr; debug &harr; review &harr; security&#8209;review &harr; refactor</div>
+          </div>
+          <div class="darrow">&rarr;</div>
+          <div class="dnode">log</div>
+          <div class="darrow">&rarr;</div>
+          <div class="dnode">release</div>
+          <div class="darrow">&rarr;</div>
+          <div class="dnode">closeout</div>
+          <div class="darrow">&rarr;</div>
+          <div class="dnode">kaizen</div>
+        </div>
+      </div>
+
+      <div class="table-scroll">
+        <table class="lifecycle">
+          <thead>
+            <tr><th>Skill</th><th>Phase</th><th>Purpose</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="skill">concept</td><td class="phase">Concept</td><td class="purpose">Idea &rarr; problem statement, requirements, user stories, via Socratic Discovery, Discovery Lenses, and verifiable requirements.</td></tr>
+            <tr><td class="skill">design</td><td class="phase">Concept</td><td class="purpose">Requirements &rarr; architecture, NFRs, diagrams, and documented design tradeoffs.</td></tr>
+            <tr><td class="skill">plan</td><td class="phase">Plan</td><td class="purpose">Design &rarr; sequenced, sized units of work, with no-orphans requirement traceability.</td></tr>
+            <tr><td class="skill">build</td><td class="phase">Construction</td><td class="purpose">Implement a planned unit of work against its design and definition of done.</td></tr>
+            <tr><td class="skill">test</td><td class="phase">Construction</td><td class="purpose">Verify a unit against acceptance criteria &mdash; strict TDD and end-to-end scenario-sensitivity checks.</td></tr>
+            <tr><td class="skill">debug</td><td class="phase">Construction</td><td class="purpose">Classify, root-cause, and fix a defect with rigorous evidence before touching code.</td></tr>
+            <tr><td class="skill">review</td><td class="phase">Construction</td><td class="purpose">Correctness/quality gate before merge, plus Critical Review for pre-approval decisions.</td></tr>
+            <tr><td class="skill">security-review</td><td class="phase">Construction</td><td class="purpose">Dedicated security pass &mdash; injection, auth, secrets, dependency, configuration risk.</td></tr>
+            <tr><td class="skill">refactor</td><td class="phase">Construction</td><td class="purpose">Improve structure, clarity, or efficiency without changing external behavior.</td></tr>
+            <tr><td class="skill">log</td><td class="phase">Delivery</td><td class="purpose">Record progress and decisions as they happen, so history doesn't need reconstructing later.</td></tr>
+            <tr><td class="skill">release</td><td class="phase">Delivery</td><td class="purpose">Deploy, verify, and hand off operationally &mdash; turn "done" into "delivered."</td></tr>
+            <tr><td class="skill">closeout</td><td class="phase">Delivery</td><td class="purpose">Confirm delivery against the original acceptance criteria.</td></tr>
+            <tr><td class="skill">kaizen</td><td class="phase">Cross-cutting</td><td class="purpose">Continuous-improvement pass every cycle, using the 3Ms of waste (Muda/Mura/Muri).</td></tr>
+            <tr><td class="skill">writing-skills</td><td class="phase">Meta</td><td class="purpose">How to add or edit a skill in this pack so new additions stay consistent.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="dev">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2>Dev-role skills</h2>
+    </div>
+    <div class="section-body">
+      <div class="role-intro">
+        <p class="lede" style="margin-bottom:0;">Artifacts a Developer produces alongside the lifecycle above &mdash; not stages of it, but the supporting record and analysis work.</p>
+        <span class="path role-path">roles/dev/</span>
+      </div>
+      <div class="skill-grid">
+        <div class="skill-card"><div class="skill-name">adr</div><div class="skill-desc">Record a significant, hard-to-reverse technical decision &mdash; reversibility, drivers, options, consequences &mdash; as a durable record separate from the design doc.</div></div>
+        <div class="skill-card"><div class="skill-name">api-contract</div><div class="skill-desc">Before implementing a REST API, define resources, endpoints, auth, status codes, error shape, pagination, and versioning so producer and consumers agree first.</div></div>
+        <div class="skill-card"><div class="skill-name">integration-spec</div><div class="skill-desc">Force concrete engineering answers on scope, scalability, reliability, security, and rollout for a cross-team integration before a launch commitment is made.</div></div>
+        <div class="skill-card"><div class="skill-name">technical-spike</div><div class="skill-desc">A time-boxed investigation or prototype to answer a specific question when there's too much uncertainty to plan or estimate confidently.</div></div>
+        <div class="skill-card"><div class="skill-name">dependency-upgrade</div><div class="skill-desc">Evaluate and roll out an upgrade to a library, framework, or runtime safely and deliberately, rather than reactively.</div></div>
+        <div class="skill-card"><div class="skill-name">runbook</div><div class="skill-desc">Document how to operate, monitor, and troubleshoot a service &mdash; the reference handed off so someone other than the author can respond to problems.</div></div>
+        <div class="skill-card"><div class="skill-name">release-notes</div><div class="skill-desc">Diff merged PRs since the previous release, summarize by theme, and publish a dated entry to the wiki.</div></div>
+        <div class="skill-card"><div class="skill-name">change-request</div><div class="skill-desc">After release notes are published, file the formal change-management item &mdash; linked back to the release notes and source PR for audit trail.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pm">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2>Product Manager skills</h2>
+    </div>
+    <div class="section-body">
+      <div class="role-intro">
+        <p class="lede" style="margin-bottom:0;">Artifacts a PM produces: owning a roadmap across the areas they're responsible for, proving whether an initiative actually worked, and deciding whether a capability should be built or bought.</p>
+        <span class="path role-path">roles/product-manager/</span>
+      </div>
+      <div class="skill-grid">
+        <div class="skill-card"><div class="skill-name">roadmap-prioritization</div><div class="skill-desc">Turn competing candidate initiatives, stakeholder input, and discovery findings into a prioritized roadmap &mdash; decided in an actual session, not just a scored spreadsheet.</div></div>
+        <div class="skill-card"><div class="skill-name">success-metrics</div><div class="skill-desc">Define numeric, falsifiable KPIs and OKR-style success metrics before an initiative starts, then report its actual outcome &mdash; including honest misses &mdash; afterward.</div></div>
+        <div class="skill-card"><div class="skill-name">build-vs-buy</div><div class="skill-desc">Decide whether a needed capability should be built in-house, bought, or bought-and-extended &mdash; weighing true total cost of ownership and competitive differentiation, pressure-tested with stakeholders, and closed out as a logged decision, not a gut call.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tpm">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2>Technical Program Manager skills</h2>
+    </div>
+    <div class="section-body">
+      <div class="role-intro">
+        <p class="lede" style="margin-bottom:0;">The mechanisms a TPM uses to run a cross-team program end to end &mdash; frame it, stand up the workspace, assign ownership, and keep decisions, risk, and status honest as it runs.</p>
+        <span class="path role-path">roles/tpm/</span>
+      </div>
+
+      <div class="callout">
+        <span class="mark">&#9670;</span>
+        <span>
+          <strong>These are not markdown-only templates.</strong> <code>tpm-program-space</code>,
+          the RACI, risk-register, decision-log, and status-update skills publish directly into a
+          real <strong>Confluence Program Hub</strong> (and reference Jira for tracking) through the
+          Atlassian MCP connector &mdash; the agent reads and writes the actual pages, it doesn't
+          just draft local files for someone to copy in by hand.
+        </span>
+      </div>
+
+      <p class="group-label">Frame the program</p>
+      <p class="group-note"><code>tpm-pdlc</code> is the map: it names the Program Management Lifecycle phases and says which single-purpose skill to run next. <code>tpm-sdd-bridge</code> is the handoff to the engineering lifecycle above &mdash; what crosses over, who approves, where specs live.</p>
+      <div class="skill-grid">
+        <div class="skill-card"><div class="skill-name">tpm-pdlc</div><div class="skill-desc">Entry point for "how do we run this program?" &mdash; dual-named PMLC phases (plain + Amazon flavor), which skill runs next, human gates, and Prepare&rarr;Plan&rarr;Execute&rarr;Measure. Produces no artifacts itself.</div></div>
+        <div class="skill-card"><div class="skill-name">tpm-sdd-bridge</div><div class="skill-desc">Connects this Program Management Lifecycle to the Spec-Driven Development eng lifecycle above: what hands off, who approves, where specs live.</div></div>
+      </div>
+
+      <p class="group-label">Concept &amp; the Program Hub</p>
+      <p class="group-note">Lock the goal and scaffold the workspace before anyone starts assigning owners.</p>
+      <div class="skill-grid">
+        <div class="skill-card"><div class="skill-name">tpm-concept</div><div class="skill-desc">Lock business goal, vision, measurable success criteria, and in/out of scope before Align. Preferred over tpm-program-brief for new programs.</div></div>
+        <div class="skill-card"><div class="skill-name">tpm-program-brief</div><div class="skill-desc">Optional one-page Hub distill of an existing tpm-concept, for readers who won't open the full Concept doc.</div></div>
+        <div class="skill-card"><div class="skill-name">tpm-program-space</div><div class="skill-desc">Scaffold the entire Confluence space in one pass when a program is assigned &mdash; a minimal Home, a content-rich Program Hub, and every artifact page pre-filled with its own starter template. Publishes via the Atlassian MCP connector.</div></div>
+        <div class="skill-card"><div class="skill-name">tpm-tooling-setup</div><div class="skill-desc">After the Confluence space exists, set Jira (or equivalent tracker) conventions &mdash; board, epics, labels &mdash; and how work links back to the Hub.</div></div>
+      </div>
+
+      <p class="group-label">Stakeholders &amp; ownership</p>
+      <p class="group-note">Identify who's involved before assigning accountability against that same roster.</p>
+      <div class="skill-grid">
+        <div class="skill-card"><div class="skill-name">tpm-stakeholder-map</div><div class="skill-desc">Systematically identify every stakeholder a new (or re-scoped) program needs, prioritized by power and interest &mdash; the roster RACI and Contested Decisions assign accountability against.</div></div>
+        <div class="skill-card"><div class="skill-name">tpm-raci</div><div class="skill-desc">Define who is Responsible, Accountable, Consulted, and Informed for each deliverable or standing decision-making role when ownership is ambiguous.</div></div>
+      </div>
+
+      <p class="group-label">Run the program</p>
+      <p class="group-note">The recurring mechanisms that keep decisions, risk, and status honest while the program is live.</p>
+      <div class="skill-grid">
+        <div class="skill-card"><div class="skill-name">decision-log</div><div class="skill-desc">Record every decision as it's made. Regular ones stay here; ones that turn out contested become a row on the shared Contested Decisions table and get linked back, never duplicated.</div></div>
+        <div class="skill-card"><div class="skill-name">tpm-contested-decisions</div><div class="skill-desc">Track and resolve decisions stalling because too many people are weighing in and nobody has final say &mdash; one Driver/Approver/Contributors/Informed row per decision.</div></div>
+        <div class="skill-card"><div class="skill-name">tpm-risk-register</div><div class="skill-desc">Identify and track program risks with a computed risk score, so they're actively managed instead of discovered only after they materialize.</div></div>
+        <div class="skill-card"><div class="skill-name">status-report</div><div class="skill-desc">A recurring, honest update on progress, health, milestones, and blockers. Rolls up into the biweekly stakeholder update when items are at risk and have a mitigation.</div></div>
+        <div class="skill-card"><div class="skill-name">tpm-biweekly-stakeholder-update</div><div class="skill-desc">A senior-stakeholder update: a recommendation, one decision table to review, progress/demos as evidence, and next-two-weeks commitments. Preferred over status-report for sponsor-level audiences.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="principles">
+    <div class="section-head">
+      <span class="section-num">06</span>
+      <h2>Design principles</h2>
+    </div>
+    <div class="section-body">
+      <div class="skill-grid">
+        <div class="skill-card"><div class="skill-name">No project-specific content</div><div class="skill-desc">Every skill applies to any AI-driven application, not just the one that inspired it.</div></div>
+        <div class="skill-card"><div class="skill-name">Consolidated, not duplicated</div><div class="skill-desc">Overlapping skills from different source projects (e.g. audit / code-review / pr-review) were merged into one canonical skill instead of kept as near-duplicates.</div></div>
+        <div class="skill-card"><div class="skill-name">Each skill states its handoff</div><div class="skill-desc">The Handoff section says what feeds in and what it feeds out to, so the pack composes into a full lifecycle rather than staying a set of disconnected checklists.</div></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <hr class="rule" />
+  <div class="foot-row">
+    <span>Spec-Driven Development &mdash; a Claude Code skill pack.</span>
+    <span>See <a href="README.md">README.md</a> for setup and <span class="path">writing-skills</span> for authoring conventions.</span>
+  </div>
+</footer>
+
+</body>
+</html>
